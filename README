@@ -1,0 +1,17 @@
+This is a placeholder README for the 'yvc' utility.
+
+'yvc' is a software package vulnerability checker.
+
+'yvc' compares the given package name against the list of known
+vulnerabilities and reports any security issues. This output contains the
+name and version of the package, the type of vulnerability, and a URL for
+further information for each vulnerable package.
+
+'yvc' was conceptually based on NetBSD's audit-packages program (see
+http://www.netbsd.org/support/security/#check-pkgsrc) and was written by
+Jan Schaumann <jschauma@netmeister.org> at Yahoo! Inc.
+
+The 'y' in yvc can stand for a number of things.  Make up your own.
+
+'yvc' will be made available to the world at large in the very exciting
+and very near future.
