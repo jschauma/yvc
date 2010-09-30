@@ -1,0 +1,77 @@
+<html>
+  <head>
+    <title>yvc -- a software package vulnerability check</title>
+  </head>
+  <body>
+    <h2>yvc -- a software package vulnerability check</h2>
+    <p>
+    <em>yvc</em> compares the given package name against the list of
+    known vulnerabilities and reports any security issues.  This output
+    contains the name and version of the package, the type of vulnerability,
+    and a URL for further information for each vulnerable package.
+    </p>
+    <p>
+    <em>yvc</em> was conceptually based on <a
+    href="http://www.netbsd.org/support/security/#check-pkgsrc">NetBSD's
+    audit-packages</a> program and was written by <a
+    href="mailto:jschauma@yahoo-inc.com">Jan Schaumann</a> in 2008 while
+    working at Yahoo! Inc.  Yahoo! open sourced the tool in the hopes that
+    it will be useful to other people -- unless otherwise noted, all files
+    are released under the terms of a 3-clause BSD license as noted in the
+    file LICENSE.
+    </p>
+    <p>
+    The 'y' in yvc can stand for a number of things.  Make up your own.
+    </p>
+    <p>The sources to <em>yvc</em> can be found at GitHub:
+    <a
+    href="http://github.com/jschauma/yvc">http://github.com/jschauma/yvc</a>.</p>
+    <hr>
+    <h3>Vulnerability lists</h3>
+    <p>
+    The following lists of known vulnerabilities are available:
+    <ul>
+      <li><a href="fbvlist">fbvlist</a> -- a list of FreeBSD specific
+          vulnerabilities derived from the <a
+          href="http://www.freebsd.org/ports/portaudit/">FreeBSD Project's
+          portaudit</a> website.<br></li>
+      <li><a href="http://ftp.netbsd.org/pub/NetBSD/packages/vulns/pkg-vulnerabilities">nbvlist</a>
+          -- a list of known vulnerabilities maintained by the <a
+          href="http://www.netbsd.org/support/security/#check-pkgsrc">NetBSD
+          Project</a>.
+          That list is signed using <a
+          href="http://pgp.mit.edu:11371/pks/lookup?op=get&search=0x4ECF4081">this
+          key</a>.<br></li>
+      <li><a href="rh4vlist">rh4vlist</a> -- a list of RHEL4 specific
+          vulnerabilities derived from <a
+          href="http://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml">this OVAL list</a>.<br></li>
+      <li><a href="rh5vlist">rh5vlist</a> -- a list of RHEL5 specific
+          vulnerabilities derived from <a
+          href="http://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml">this OVAL list</a>.<br></li>
+    </ul>
+    <hr>
+    <h3>Common usage</h3>
+    <p>
+    It is recommended for users of this package to run the <a
+    href="fetch-vlist.1.html">fetch-vlist</a> periodically from cron.
+    It is also recommended to run the <a href="yvc.1.html">yvc</a> command regularly
+    from cron.
+    An example crontab would look like this:</p>
+    <tt>
+0 3 * * * /usr/local/bin/fetch-vlist<br>
+0 4 * * * rpm -qa | /usr/local/bin/yvc
+    </tt>
+    </p>
+    <p>
+    Of course you can also invoke <em>yvc</em> manually.  See the <a
+    href="yvc.1.html#sect7">examples in the manual page</a> for details.
+    </p>
+    <h3>Manual pages</h3>
+    <ul>
+      <li><a href="fetch-vlist.1.html">fetch-vlist(1)</a></li>
+      <li><a href="yvc.1.html">yvc(1)</a></li>
+      <li><a href="yvc.conf.5.html">yvc.conf(5)</a></li>
+    </ul>
+    <hr>
+  </body>
+</html>

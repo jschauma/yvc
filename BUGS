@@ -1,0 +1,25 @@
+Known bugs:
+-----------
+
+Patchlevels are not dealt with correctly.  That is, if, for example, the
+package listed in the vulnerabilities file is marked as "foo-1.2pl3" and a
+package with a tiny version such as "foo-1.2.1" is installed, it may falsely
+match.  That is, comparison of "foo-1.2pl3" and "foo-1.2.1" claims that the
+patchlevel version is higher.  (The converse scenario also holds.)
+
+This is a restriction of the used distutils.versions.LooseVersion
+implementation.  Presumably, the assumption is that a piece of software
+wouldn't mix patchlevels with tiny versions (?).  Note that the expensive
+shell-out to parse_version(1) wouldn't solve this problem either: that program
+operates on the same assumption.
+
+----
+
+Deeply nested brace expansions are not correctly dealt with.  The
+braceExpansion function is able to handle simply nested expansions such as
+"foo-{,bar{-baz,-bla}}", but deeper levels of nesting may not yield the
+expected results.
+
+For the purposes of the vulnerability list, this seems acceptable for the time
+being, as deeply nested version strings are not found.  An alternative (albeit
+very expensive) would be to shell out to zsh to do brace expansion.

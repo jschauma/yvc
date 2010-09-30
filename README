@@ -1,5 +1,3 @@
-This is a placeholder README for the 'yvc' utility.
-
 'yvc' is a software package vulnerability checker.
 
 'yvc' compares the given package name against the list of known
@@ -9,9 +7,9 @@ further information for each vulnerable package.
 
 'yvc' was conceptually based on NetBSD's audit-packages program (see
 http://www.netbsd.org/support/security/#check-pkgsrc) and was written by
-Jan Schaumann <jschauma@netmeister.org> at Yahoo! Inc.
+Jan Schaumann <jschauma@yahoo-inc.com> in 2008 while working at Yahoo!
+Inc.  Yahoo! open sourced this tool in the hopes that it will be useful to
+other people -- unless otherwise noted, all files are released under the
+terms of a 3-clause BSD license as noted in the file LICENSE.
 
 The 'y' in yvc can stand for a number of things.  Make up your own.
-
-'yvc' will be made available to the world at large in the very exciting
-and very near future.

@@ -1,0 +1,80 @@
+.\"	Copyright (c) 2008,2009,2010 Yahoo! Inc.
+.\"
+.Dd September 30, 2010
+.Dt FETCH-VLIST 1
+.Os
+.Sh NAME
+.Nm fetch-vlist
+.Nd fetch and install vulnerbility lists
+.Sh SYNOPSIS
+.Nm
+.Op Fl dhiv
+.Sh DESCRIPTION
+The
+.Nm
+tool downloads and installs the vulnerability lists used by
+.Xr yvc 1 .
+Each list is expected to be PGP signed;
+.Nm
+will verify the signature after donwloading the file.
+.Pp
+Originally, the lists are fetched into a temporary location.
+If a fetched file is different from the currently used version, then it is
+installed.
+.Sh OPTIONS
+The following options are supported by
+.Nm :
+.Bl -tag -width _h
+.It Fl d
+Don't do anything, just report what would be done.
+.It Fl h
+Print a short usage statement and exit.
+.It Fl i
+Ignore any errors due to the PGP signature.
+Errors may include the inability to verify the signature because the
+public key is not in the used keyring or an actual signature mismatch.
+.It Fl v
+Be verbose.
+.El
+.Sh LISTS
+The following lists may be downloaded and installed by
+.Nm :
+.Bl -tag -width nbvlist_
+.It fbvlist
+A list of vulnerabilities known in the FreeBSD ports collection, derived
+from http://www.freebsd.org/ports/portaudit/ and fetched from
+http://<hostname>/yvc/fbvlist.
+.It nbvlist
+A list of vulnerabilities provided by the NetBSD Project.
+See http://www.netbsd.org/support/security/#check-pkgsrc for details.
+Retrieved from
+http://ftp.netbsd.org/pub/NetBSD/packages/vulns/pkg-vulnerabilities.
+.It rh4vlist
+A list of vulnerabilities known in RHEL4, derived from
+http://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml.bz2 and
+fetched from
+http://<hostname>/yvc/rh4vlist.
+.It rh5vlist
+A list of vulnerabilities known in RHEL5, derived from
+http://www.redhat.com/security/data/oval/com.redhat.rhsa-all.xml.bz2 and
+fetched from
+http://<hostname>/yvc/rh5vlist.
+.El
+.Sh EXIT STATUS
+.Ex -std
+.Sh FILES
+.Bl -tag -width _home_y_var_yvc_
+.It /home/y/var/yvc
+The final directory into which the file is installed.
+.El
+.Sh SEE ALSO
+.Xr yvc 1
+.Sh HISTORY
+.Nm
+was conceptually based on NetBSD's "download-vulnerability-list" command.
+It was originally written by
+.An Jan Schaumann
+.Aq jschauma@yahoo-inc.com
+in July 2008.
+.Sh BUGS
+Please report bugs and feature requests to the author.
