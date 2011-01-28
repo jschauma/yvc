@@ -1,0 +1,55 @@
+Changelog:
+
+Version 3.1.3 (2011-01-27)
+ * properly match exact vulnerability matches
+
+Version 3.1.2 (2010-01-08)
+ * fetch-vlist: set PATH to ensure helper tools are found
+
+Version 3.1.1 (2009-11-01)
+ * actually do fetch the rh vlists
+
+Version 3.1.0 (2009-11-01)
+ * add support for fetching and using vlists for RHEL4 and RHEL5
+ * switch to using the yvlist and the correct platform-specific
+   vlist by default
+
+Version 3.0.0 (2009-05-03)
+ * avoid errors when removing the vlists that haven't been changed
+ * switch to using the FreeBSD specific vlist by default and disable
+   the NetBSD vlist (though it continues to be fetched)
+
+Version 2.0.5 (2009-02-13)
+ * use python2.5 as the shebang, as we're explicitly requiring
+   ypython25
+
+Version 2.0.4 (2009-02-13)
+ * ensure a single vlist given on the command-line overrides the defaults
+   from the config file
+
+Version 2.0.3 (2008-12-09)
+ * use ypython25 instead of ypython-2.5
+ * set timeout when fetching vlists, try only once
+ * add vlists to manifest
+ * don't fail installation if we can't fetch all vlists
+
+Version 2.0.2 (2008-08-14)
+ * use bugzilla for bug tracking
+
+Version 2.0.1 (2008-07-31)
+ * properly match versions specified as foo>=X<=Y
+   (previously, only foo>=X<Y would work)
+ * better error reporting on unexpected comparison operator
+
+Version 2.0 (2008-07-19)
+ * fix usage for fetch-vlist
+ * add support for multiple vlists
+ * changed config file paramenter from VLIST to VLISTS
+
+Version 1.0 (2008-07-10)
+ * don't try to generate the list of packages to check -- accept it
+   from the user as command-line arguments or from stdin (or both)
+ * also install additional documentation (BUGS, TODO)
+
+Version 0.1 (2008-07-03)
+ * Initial version
