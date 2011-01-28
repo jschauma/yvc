@@ -475,7 +475,7 @@ def versionCompare(v1, op, v2):
 
     Arguments:
         v1 -- a string or Version object
-        op -- operator, indicating type of comparison (">", ">=", "<", "<=")
+        op -- operator, indicating type of comparison (">", ">=", "<", "<=", "=")
         v2 -- a string or Version object
 
     Returns:
@@ -493,7 +493,7 @@ def versionCompare(v1, op, v2):
         return (v1 < v2)
     elif (op == "<="):
         return (v1 <= v2)
-    elif (op == "=="):
+    elif (op == "="):
         return (v1 == v2)
     else:
         # shouldn't happen
