@@ -1,6 +1,6 @@
 .\"	Copyright (c) 2008,2009,2010 Yahoo! Inc.
 .\"
-.Dd September 30, 2010
+.Dd April 20, 2011
 .Dt YVC 1
 .Os
 .Sh NAME
@@ -60,6 +60,7 @@ exploit, and an Internet address for further information:
 .Aq package pattern
 .Aq type
 .Aq url
+.Aq severity
 .El
 .Pp
 The type of exploit can be any text, although
@@ -134,6 +135,12 @@ weak-encryption
 .It
 weak-ssl-authentication
 .El
+.Pp
+The severity of the vulnerability is an optional free-form field that an
+organization may use to further classify the vulnerability.
+For example, one might choose to assign a vulnerability a severity level
+indicating the impact and required resolution according to internal
+security procedures and requirements.
 .Pp
 The list of vulnerabilities is stored per default in two files under
 /usr/local/var/yvc/.

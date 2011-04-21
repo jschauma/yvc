@@ -9,7 +9,7 @@ yvc was based conceptually on NetBSD's audit-packages(1) command.
 
 """
 
-# Copyright (c) 2008,2010 Yahoo! Inc.
+# Copyright (c) 2008,2010,2011 Yahoo! Inc.
 #
 # Originally written by Jan Schaumann <jschauma@yahoo-inc.com> in July 2008.
 
@@ -110,8 +110,11 @@ class Checker(object):
                 continue
             logging.log(15, "Checking package '%s' against %s..." % (package, v.url))
             if v.match(pkg):
-                print "Package %s has a %s vulnerability, see: %s" % \
-                    (package, v.type, v.url)
+                sev = ""
+                if v.severity:
+                    sev = " %s" % v.severity
+                print "Package %s has a %s%s vulnerability, see: %s" % \
+                    (package, v.type, sev, v.url)
 
 
     def getOpt(self, opt):
@@ -164,7 +167,7 @@ class Checker(object):
 
         Arguments:
             line -- a line from a vulnerability list, expected to be in the
-                    format "name<tab>type<tab>url"
+                    format "name<tab>type<tab>url(<tab>severity)"
 
         Returns:
             None -- input line was not in expected format; or
@@ -173,13 +176,14 @@ class Checker(object):
 
         v = None
 
-        pattern = re.compile('(?P<pattern>^[^#\s]+)\s+(?P<type>[^\s]+)\s+(?P<url>.*)$')
+        pattern = re.compile('(?P<pattern>^[^#\s]+)\s+(?P<type>[^\s]+)\s+(?P<url>\S+)(?P<severity>\s+.*)?$')
         rem = pattern.match(line)
 
         if rem:
             v = Vulnerability(rem.group('pattern'),
                                 rem.group('type'),
-                                rem.group('url'))
+                                rem.group('url'),
+                                rem.group('severity'))
 
         return v
 
@@ -332,16 +336,23 @@ class Vulnerability(object):
 
     A Vulnerability consists of a package name-version pattern, a
     vulnerability type and a URL providing more information about the given
-    vulnerability.  Each such attribute is represented as a string and can
-    trivially be accessed via the members 'pattern', 'type' and 'url'.
+    vulnerability.  A Vulnerability may also contain an optional
+    'severity' that describes the urgency with which it should be addressed.
+    The meaning of this field is most likely organization-specific.
+    Each such attribute is represented as a string and can
+    trivially be accessed via the members 'pattern', 'type', 'url',
+    'severity'.
     """
 
-    def __init__(self, pattern, type, url):
+    def __init__(self, pattern, type, url, severity=None):
         """Construct a Vulnerability with the given attributes."""
 
         self.pattern = pattern
         self.type = type
         self.url = url
+        self.severity = severity
+        if severity:
+            self.severity = severity.strip()
 
 
     def match(self, pkg):
