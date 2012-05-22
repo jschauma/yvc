@@ -1,5 +1,14 @@
 Changelog:
 
+Version 3.4.0 (2012-05-22)
+ * include setup.py, shuffle files around a bit for this
+ * update and add a few make targets
+ * provide regularly updated vlists on netmeister.org; use those
+ * unroll loops in Makefile so this works with gmake
+ * default to rh5 and netbsd vlists
+ * use relative path to 'yvc' in yvc.php
+ * exit '2' if vulnerabilities were found
+
 Version 3.3.0 (2011-12-07)
  * update redhat-oval->yvc converter to handle input as a stream
  * update sample Makefile to include RH6 lists

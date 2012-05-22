@@ -8,7 +8,7 @@
 # A unittest for functionality in yvc.py.
 
 import sys
-sys.path.append("../lib/")
+sys.path.append("../yahoo/")
 
 from distutils.version import LooseVersion
 import ConfigParser

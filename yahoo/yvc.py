@@ -40,6 +40,7 @@ class Checker(object):
 
     EXIT_ERROR = 1
     EXIT_SUCCESS = 0
+    EXIT_VULNERABLE = 2
 
     def __init__(self):
         """Construct a Checker object with default values."""
@@ -60,6 +61,8 @@ class Checker(object):
         self.__cfg_section = "YVC"
 
         self.__vulns = []
+
+        self.vulnerable = False
 
 
     def _setVerbosity(self, f):
@@ -110,6 +113,7 @@ class Checker(object):
                 continue
             logging.log(15, "Checking package '%s' against %s..." % (package, v.url))
             if v.match(pkg):
+                self.vulnerable = True
                 sev = ""
                 if v.severity:
                     sev = " %s" % v.severity
@@ -570,6 +574,11 @@ def main(args):
                     checker.checkPackage(p)
         else:
             doStdin(checker)
+
+        if checker.vulnerable:
+            sys.exit(checker.EXIT_VULNERABLE)
+        else:
+            sys.exit(checker.EXIT_SUCCESS)
 
     except KeyboardInterrupt:
         # catch ^C, so we don't get a "confusing" python trace

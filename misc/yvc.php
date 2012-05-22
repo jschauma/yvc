@@ -23,7 +23,7 @@ if (isset($packages) && !empty($packages)) {
 
 	$cwd = '/tmp';
 
-	$process = proc_open('/usr/local/bin/yvc', $dsc, $pipes, NULL, NULL);
+	$process = proc_open('yvc', $dsc, $pipes, NULL, NULL);
 
 	if (is_resource($process)) {
 		fwrite($pipes[0], $pkgs);

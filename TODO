@@ -4,6 +4,5 @@ package for public:
 	- write configure script to handle fetch-vlist:
 		- determine appropriate vlists to use
 		- provide option for place to upload/download
-	- write python magic to install correctly
 
 review helper scripts to ensure they work (efficiently) on all platforms

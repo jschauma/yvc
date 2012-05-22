@@ -28,15 +28,17 @@ TMPFILES=""
 ##
 ## Modify this section to specify where to fetch your vlists from.
 ##
-NLISTS=4
+NLISTS=5
 VLIST1="http://ftp.netbsd.org/pub/NetBSD/packages/vulns/pkg-vulnerabilities"
-VLIST1_LOCATION="/usr/local/var/var/yvc/nbvlist"
-VLIST2="http://<somewhere>/yvc/fbvlist"
+VLIST1_LOCATION="/usr/local/var/yvc/nbvlist"
+VLIST2="http://www.netmeister.org/apps/yvc/fbvlist"
 VLIST2_LOCATION="/usr/local/var/yvc/fbvlist"
-VLIST3="http://<somewhere>/yvc/rh4vlist"
+VLIST3="http://www.netmeister.org/apps/yvc/rh4vlist"
 VLIST3_LOCATION="/usr/local/var/yvc/rh4vlist"
-VLIST4="http://<somewhere>/yvc/rh5vlist"
+VLIST4="http://www.netmeister.org/apps/yvc/rh5vlist"
 VLIST4_LOCATION="/usr/local/var/yvc/rh5vlist"
+VLIST5="http://www.netmeister.org/apps/yvc/rh6vlist"
+VLIST5_LOCATION="/usr/local/var/yvc/rh6vlist"
 
 WGET="wget"
 WGET_FLAGS="-t 1 -T 10 -q"
@@ -134,7 +136,7 @@ installFile() {
 	local final=${2}
 
 	${DONT} cmp -s ${tmpfile} ${final} || {
-		${DONT} mv ${tmpfile} ${final} && \
+		${DONT} mv -f ${tmpfile} ${final} && \
 		${DONT} chmod 444 ${final}
 	}
 }
