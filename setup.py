@@ -3,7 +3,7 @@
 from distutils.core import setup
 
 setup(name = 'yvc',
-	version = '3.3.1',
+	version = '3.4.0',
 	description = 'a software package vulnerability check',
 	author = 'Jan Schaumann',
 	author_email = 'jschauma@netmeister.org',
