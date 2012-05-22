@@ -20,7 +20,7 @@ GONERS= ${RH6VLIST}.in ${RH5VLIST}.in ${RH4VLIST}.in ${FBVLIST}.in \
 
 date!=date
 
-all: fetch sign
+all: fetch
 
 help:
 	@echo "The following targets are available:"
@@ -29,7 +29,6 @@ help:
 	@echo "help	  print this help"
 	@echo "install    install yvc and fetch-vlist"
 	@echo "rpm        build an RPM"
-	@echo "sign	  sign the vulnerability list"
 	@echo "uninstall  uninstall yvc and fetch-vlist"
 
 install: man-compress
