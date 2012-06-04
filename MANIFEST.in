@@ -1,2 +1,2 @@
 recursive-include doc man/*gz
-recursive-include conf *.conf
+recursive-include conf *

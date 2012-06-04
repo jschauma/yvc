@@ -1,5 +1,9 @@
 Changelog:
 
+Version 3.4.1 (2012-06-04)
+ * derive default config file location at 'make' time
+ * include vlists in RPM
+
 Version 3.4.0 (2012-05-22)
  * include setup.py, shuffle files around a bit for this
  * update and add a few make targets

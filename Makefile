@@ -16,7 +16,7 @@ LISTS= ${RH6VLIST} ${RH5VLIST} ${RH4VLIST} ${FBVLIST}
 MANPAGES=fetch-vlist.1 yvc.1 yvc.conf.5
 
 GONERS= ${RH6VLIST}.in ${RH5VLIST}.in ${RH4VLIST}.in ${FBVLIST}.in \
-	${RHEL_XML} MANIFEST
+	${RHEL_XML} MANIFEST 
 
 date!=date
 
@@ -31,15 +31,33 @@ help:
 	@echo "rpm        build an RPM"
 	@echo "uninstall  uninstall yvc and fetch-vlist"
 
-install: man-compress
+install: man-compress replace-prefix
 	python setup.py install
+
+replace-prefix:
+	@cp bin/fetch-vlist bin/fetch-vlist.in
+	@cp conf/yvc.conf conf/yvc.conf.in
+	@cp doc/man/fetch-vlist.1 doc/man/fetch-vlist.1.in
+	@cp doc/man/yvc.1 doc/man/yvc.1.in
+	@cp doc/man/yvc.conf.5 doc/man/yvc.conf.5.in
+	@cp yahoo/yvc.py yahoo/yvc.py.in
+	@prefix=$$(echo "import sysprint sys.prefix" | python);	\
+		if [ "$$prefix" = "/usr" ]; then			\
+			prefix="";					\
+		fi;							\
+		sed -e "s|/usr/local/|$$prefix/|g" bin/fetch-vlist.in > bin/fetch-vlist; \
+		sed -e "s|/usr/local/|$$prefix/|g" conf/yvc.conf.in > conf/yvc.conf; \
+		sed -e "s|/usr/local/|$$prefix/|g" doc/man/yvc.1.in > doc/man/yvc.1; \
+		sed -e "s|/usr/local/|$$prefix/|g" doc/man/yvc.conf.5.in > doc/man/yvc.conf.5; \
+		sed -e "s|/usr/local/|$$prefix/|g" doc/man/fetch-vlist.1.in > doc/man/fetch-vlist.1; \
+		sed -e "s|/usr/local/|$$prefix/|g" yahoo/yvc.py.in > yahoo/yvc.py;
 
 uninstall:
 	@echo "Sorry, setup.py apparently can't do that."
 	@echo "Your best bet is to run 'python setup.py install --record /tmp/f'"
 	@echo "followed by 'xargs rm -f </tmp/f'"
 
-rpm: man-compress
+rpm: replace-prefix man-compress
 	python setup.py bdist_rpm
 
 man-compress:
@@ -69,5 +87,11 @@ rh6vlist:
 	python ./misc/redhat_oval_to_yvc.py 6 | sort -u > rh6vlist
 
 clean:
+	mv -f bin/fetch-vlist.in bin/fetch-vlist 2>/dev/null || true
+	mv -f conf/yvc.conf.in conf/yvc.conf 2>/dev/null || true
+	mv -f doc/man/yvc.1.in doc/man/yvc.1 2>/dev/null || true
+	mv -f doc/man/yvc.conf.5.in doc/man/yvc.conf.5 2>/dev/null || true
+	mv -f doc/man/fetch-vlist.1.in doc/man/fetch-vlist.1 2>/dev/null || true
+	mv -f yahoo/yvc.in yahoo/yvc 2>/dev/null || true
 	rm -f ${LISTS} ${GONERS} doc/man/*gz
 	rm -fr build dist 
